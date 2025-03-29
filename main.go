@@ -3,12 +3,17 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http"
 	"os"
+	"time"
 
 	"github.com/Bayan2019/hackathon-2025/configuration"
+	"github.com/Bayan2019/hackathon-2025/controllers"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
+
+	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
 // @title POLICE API
@@ -77,4 +82,18 @@ func main() {
 		AllowCredentials: false,
 		MaxAge:           300,
 	}))
+
+	router.Get("/hello", controllers.HelloHandler)
+
+	router.Get("/swagger/*",
+		httpSwagger.Handler(httpSwagger.URL("https://go-ozinshe.onrender.com/swagger/doc.json")))
+
+	srv := &http.Server{
+		Addr:              ":" + port,
+		Handler:           router,
+		ReadHeaderTimeout: time.Second * 10,
+	}
+
+	log.Printf("Serving on: http://localhost:%s\n", port)
+	log.Fatal(srv.ListenAndServe())
 }
