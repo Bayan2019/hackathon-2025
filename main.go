@@ -86,7 +86,7 @@ func main() {
 	router.Get("/hello", controllers.HelloHandler)
 
 	router.Get("/swagger/*",
-		httpSwagger.Handler(httpSwagger.URL("https://go-ozinshe.onrender.com/swagger/doc.json")))
+		httpSwagger.Handler(httpSwagger.URL("https://hackathon-2025-zfmi.onrender.com/swagger/doc.json")))
 
 	srv := &http.Server{
 		Addr:              ":" + port,
