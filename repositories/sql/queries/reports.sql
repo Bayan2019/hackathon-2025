@@ -14,7 +14,8 @@ SELECT * FROM reports WHERE id = ?;
 
 -- name: UpdateReport :exec
 UPDATE reports
-SET date = ?,
+SET updated_at = CURRENT_TIMESTAMP,
+    date = ?,
     description = ?,
     location = ?
 WHERE id = ?;
