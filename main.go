@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/Bayan2019/hackathon-2025/configuration"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -47,4 +49,32 @@ func main() {
 		log.Println("Running without CRUD endpoints")
 		fmt.Println(err.Error())
 	}
+
+	dir := os.Getenv("DIR")
+	jwtSecret := os.Getenv("JWT_SECRET")
+	if jwtSecret == "" {
+		jwtSecret = "superozinshe"
+	}
+
+	if configuration.ApiCfg != nil {
+		configuration.ApiCfg.Dir = dir
+		configuration.ApiCfg.JwtSecret = jwtSecret
+	} else {
+		fmt.Println("No DATABASE_URL")
+		configuration.ApiCfg = &configuration.ApiConfiguration{
+			Dir:       dir,
+			JwtSecret: jwtSecret,
+		}
+	}
+
+	router := chi.NewRouter()
+
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins:   []string{"https://*", "http://*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"*"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: false,
+		MaxAge:           300,
+	}))
 }
