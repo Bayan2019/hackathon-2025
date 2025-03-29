@@ -1,8 +1,7 @@
 -- +goose Up
 CREATE TABLE centers(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    address TEXT NOT NULL,
-    
+    address TEXT UNIQUE NOT NULL  
 );
 
 -- +goose Down
