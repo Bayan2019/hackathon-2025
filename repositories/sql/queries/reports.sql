@@ -1,6 +1,6 @@
 -- name: CreateReport :one
-INSERT INTO reports(description, location)
-VALUES (?, ?)
+INSERT INTO reports(description, location, date)
+VALUES (?, ?, ?)
 RETURNING id;
 --
 

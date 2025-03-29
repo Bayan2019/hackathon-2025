@@ -10,18 +10,19 @@ import (
 )
 
 const createReport = `-- name: CreateReport :one
-INSERT INTO reports(description, location)
-VALUES (?, ?)
+INSERT INTO reports(description, location, date)
+VALUES (?, ?, ?)
 RETURNING id
 `
 
 type CreateReportParams struct {
 	Description string
 	Location    string
+	Date        string
 }
 
 func (q *Queries) CreateReport(ctx context.Context, arg CreateReportParams) (int64, error) {
-	row := q.db.QueryRowContext(ctx, createReport, arg.Description, arg.Location)
+	row := q.db.QueryRowContext(ctx, createReport, arg.Description, arg.Location, arg.Date)
 	var id int64
 	err := row.Scan(&id)
 	return id, err
@@ -39,7 +40,7 @@ func (q *Queries) DeleteReport(ctx context.Context, id int64) error {
 
 const getReportById = `-- name: GetReportById :one
 
-SELECT id, description, location, date FROM reports WHERE id = ?
+SELECT id, created_at, updated_at, description, location, date FROM reports WHERE id = ?
 `
 
 func (q *Queries) GetReportById(ctx context.Context, id int64) (Report, error) {
@@ -47,6 +48,8 @@ func (q *Queries) GetReportById(ctx context.Context, id int64) (Report, error) {
 	var i Report
 	err := row.Scan(
 		&i.ID,
+		&i.CreatedAt,
+		&i.UpdatedAt,
 		&i.Description,
 		&i.Location,
 		&i.Date,
@@ -56,7 +59,7 @@ func (q *Queries) GetReportById(ctx context.Context, id int64) (Report, error) {
 
 const getReports = `-- name: GetReports :many
 
-SELECT id, description, location, date FROM reports
+SELECT id, created_at, updated_at, description, location, date FROM reports
 `
 
 func (q *Queries) GetReports(ctx context.Context) ([]Report, error) {
@@ -70,6 +73,8 @@ func (q *Queries) GetReports(ctx context.Context) ([]Report, error) {
 		var i Report
 		if err := rows.Scan(
 			&i.ID,
+			&i.CreatedAt,
+			&i.UpdatedAt,
 			&i.Description,
 			&i.Location,
 			&i.Date,

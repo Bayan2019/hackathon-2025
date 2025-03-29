@@ -29,6 +29,12 @@ type File struct {
 	UpdatedAt string
 }
 
+type FilesNotification struct {
+	AddedAt time.Time
+	FileID  string
+	NoteID  int64
+}
+
 type FilesReport struct {
 	AddedAt  time.Time
 	FileID   string
@@ -36,8 +42,10 @@ type FilesReport struct {
 }
 
 type Notification struct {
-	ID   int64
-	Note string
+	ID        int64
+	CreatedAt string
+	UpdatedAt string
+	Note      string
 }
 
 type Operator struct {
@@ -59,6 +67,8 @@ type RefreshToken struct {
 
 type Report struct {
 	ID          int64
+	CreatedAt   string
+	UpdatedAt   string
 	Description string
 	Location    string
 	Date        string
