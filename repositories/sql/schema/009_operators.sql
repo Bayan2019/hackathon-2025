@@ -1,10 +1,11 @@
 -- +goose Up
-CREATE TABLE duty_operators(
+CREATE TABLE operators(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     begin_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     end_at TEXT NOT NULL,
     police_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    center_id INTEGER NOT NULL REFERENCES centers(id) ON DELETE CASCADE,
+    center_id INTEGER NOT NULL REFERENCES centers(id) ON DELETE CASCADE
 );
 
 -- +goose Down
-DROP TABLE centers;
+DROP TABLE operators;

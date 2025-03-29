@@ -1,6 +1,6 @@
 -- name: CreateUser :one
-INSERT INTO users(name, email, password_hash)
-VALUES (?, ?, ?)
+INSERT INTO users(name, password_hash, iin, phone, date_of_birth, current_location)
+VALUES (?, ?, ?, ?, ?, ?)
 RETURNING id;
 --
 
@@ -25,8 +25,9 @@ UPDATE users
 SET updated_at = CURRENT_TIMESTAMP,
     name = ?,
     phone = ?,
-    date_of_birth = ?,
-    phone = ?
+    iin = ?,
+    date_of_birth = ?, 
+    current_location = ?
 WHERE id = ?;
 --
 

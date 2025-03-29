@@ -1,9 +1,11 @@
 -- +goose Up
 CREATE TABLE communications(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     from_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     to_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     send_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     message TEXT NOT NULL DEFAULT '', 
+    type TEXT NOT NULL DEFAULT 'regular'
 );
 
 -- +goose Down

@@ -1,7 +1,8 @@
 -- +goose Up
 CREATE TABLE files(
     id TEXT PRIMARY KEY,
-    report_id INTEGER NOT NULL REFERENCES reports(id) ON DELETE CASCADE
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- +goose Down
