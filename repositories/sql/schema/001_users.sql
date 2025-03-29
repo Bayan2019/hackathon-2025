@@ -5,8 +5,9 @@ CREATE TABLE users(
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     name TEXT NOT NULL,
     -- email TEXT NOT NULL UNIQUE,
+    date_of_birth TEXT NOT NULL DEFAULT '2000-01-01',
     password_hash TEXT NOT NULL,
-    address TEXT,
+    current_location TEXT NOT NULL DEFAULT 'Almaty',
     phone TEXT NOT NULL DEFAULT '+0(000)000-00-00'
 );
 
