@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ozinshe-go
-GOOS=linux GOARCH=amd64 go build -o hackathon2025
+GOOS=linux GOARCH=amd64 go build -o hackathon-2025
