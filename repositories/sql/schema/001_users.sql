@@ -8,7 +8,7 @@ CREATE TABLE users(
     date_of_birth TEXT NOT NULL DEFAULT '2000-01-01',
     password_hash TEXT NOT NULL,
     current_location TEXT NOT NULL DEFAULT 'Almaty',
-    phone TEXT NOT NULL DEFAULT '+0(000)000-00-00'
+    phone TEXT UNIQUE NOT NULL, 
 );
 
 -- +goose Down
