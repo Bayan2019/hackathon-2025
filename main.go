@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
 
+	_ "github.com/Bayan2019/hackathon-2025/docs"
 	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
