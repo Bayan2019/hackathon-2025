@@ -5,8 +5,8 @@ import (
 	"errors"
 	"log"
 
-	"github.com/Bayan2019/go-ozinshe/repositories/database"
 	// _ "github.com/mattn/go-sqlite3"
+	"github.com/Bayan2019/hackathon-2025/repositories/database"
 	_ "github.com/tursodatabase/libsql-client-go/libsql"
 )
 
