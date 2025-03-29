@@ -95,7 +95,8 @@ func (q *Queries) GetReports(ctx context.Context) ([]Report, error) {
 const updateReport = `-- name: UpdateReport :exec
 
 UPDATE reports
-SET date = ?,
+SET updated_at = CURRENT_TIMESTAMP,
+    date = ?,
     description = ?,
     location = ?
 WHERE id = ?
